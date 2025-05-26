@@ -10,13 +10,42 @@
 		<input
 			type="number"
 			inputmode="decimal"
-			min="1"
+			min="0.25"
+			step="any"
 			on:blur={() => (scaleNum = scaleNum || 1)}
 			on:focus={() => (scaleNum = scaleNum == 1 ? null : scaleNum)}
 			bind:value={scaleNum}
 		/>
-		<button on:click={() => scaleNum = Math.max((scaleNum || 1) - 1, 1)}>-</button>
-		<button on:click={() => scaleNum = (scaleNum || 1) + 1}>+</button>
+		<button on:click={() => {
+			const current = scaleNum || 1;
+			if (current > 1) {
+				scaleNum = current - 1;
+			} else if (current === 1) {
+				scaleNum = 0.75;
+			} else if (current === 0.75) {
+				scaleNum = 0.5;
+			} else if (current === 0.5) {
+				scaleNum = 0.25;
+			} else {
+				scaleNum = 0.25;
+			}
+		}}>-</button>
+		<button on:click={() => {
+			const current = scaleNum || 1;
+			if (current < 1) {
+				if (current === 0.25) {
+					scaleNum = 0.5;
+				} else if (current === 0.5) {
+					scaleNum = 0.75;
+				} else if (current === 0.75) {
+					scaleNum = 1;
+				} else {
+					scaleNum = 1;
+				}
+			} else {
+				scaleNum = current + 1;
+			}
+		}}>+</button>
 	</label>
 </div>
 <style>
