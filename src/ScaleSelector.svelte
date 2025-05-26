@@ -18,33 +18,11 @@
 		/>
 		<button on:click={() => {
 			const current = scaleNum || 1;
-			if (current > 1) {
-				scaleNum = current - 1;
-			} else if (current === 1) {
-				scaleNum = 0.75;
-			} else if (current === 0.75) {
-				scaleNum = 0.5;
-			} else if (current === 0.5) {
-				scaleNum = 0.25;
-			} else {
-				scaleNum = 0.25;
-			}
+			scaleNum = Math.max(0.25, current - 0.25);
 		}}>-</button>
 		<button on:click={() => {
 			const current = scaleNum || 1;
-			if (current < 1) {
-				if (current === 0.25) {
-					scaleNum = 0.5;
-				} else if (current === 0.5) {
-					scaleNum = 0.75;
-				} else if (current === 0.75) {
-					scaleNum = 1;
-				} else {
-					scaleNum = 1;
-				}
-			} else {
-				scaleNum = current + 1;
-			}
+			scaleNum = current + 0.25;
 		}}>+</button>
 	</label>
 </div>
